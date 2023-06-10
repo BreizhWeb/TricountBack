@@ -11,22 +11,56 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Depense = void 0;
 const sequelize_typescript_1 = require("sequelize-typescript");
+const userModel_1 = require("./userModel");
+const categorieDepenseModel_1 = require("./categorieDepenseModel");
 let Depense = exports.Depense = class Depense extends sequelize_typescript_1.Model {
 };
 __decorate([
     (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.STRING,
-        allowNull: false,
+        type: sequelize_typescript_1.DataType.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
     }),
-    __metadata("design:type", String)
-], Depense.prototype, "name", void 0);
+    __metadata("design:type", Number)
+], Depense.prototype, "id", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.STRING,
+        type: sequelize_typescript_1.DataType.FLOAT,
         allowNull: false,
     }),
-    __metadata("design:type", String)
-], Depense.prototype, "description", void 0);
+    __metadata("design:type", Number)
+], Depense.prototype, "montant", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.DATE,
+        allowNull: false,
+    }),
+    __metadata("design:type", Date)
+], Depense.prototype, "date", void 0);
+__decorate([
+    (0, sequelize_typescript_1.ForeignKey)(() => userModel_1.User),
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.INTEGER,
+        allowNull: false,
+    }),
+    __metadata("design:type", Number)
+], Depense.prototype, "id_utilisateur_payeur", void 0);
+__decorate([
+    (0, sequelize_typescript_1.ForeignKey)(() => categorieDepenseModel_1.CategorieDepense),
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.INTEGER,
+        allowNull: false,
+    }),
+    __metadata("design:type", Number)
+], Depense.prototype, "id_categorie_depense", void 0);
+__decorate([
+    (0, sequelize_typescript_1.BelongsTo)(() => userModel_1.User),
+    __metadata("design:type", userModel_1.User)
+], Depense.prototype, "utilisateur_payeur", void 0);
+__decorate([
+    (0, sequelize_typescript_1.BelongsTo)(() => categorieDepenseModel_1.CategorieDepense),
+    __metadata("design:type", categorieDepenseModel_1.CategorieDepense)
+], Depense.prototype, "categorie_depense", void 0);
 exports.Depense = Depense = __decorate([
     (0, sequelize_typescript_1.Table)({
         timestamps: false,

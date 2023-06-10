@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize-typescript";
 import { User } from "../models/userModel";
 import { Depense } from "../models/depenseModel";
-import { Categorie } from "../models/categorieModel";
+import { CategorieDepense } from "../models/categorieDepenseModel";
 
 
 const connection = new Sequelize({
@@ -11,7 +11,7 @@ const connection = new Sequelize({
   password: "",
   database: "tricount",
   logging: false,
-  models: [User, Depense, Categorie],
+  models: [User, Depense, CategorieDepense],
 });
 
 export default connection;

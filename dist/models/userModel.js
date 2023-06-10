@@ -11,22 +11,62 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 const sequelize_typescript_1 = require("sequelize-typescript");
+const bcrypt = require('bcrypt');
+const depenseModel_1 = require("./depenseModel");
 let User = exports.User = class User extends sequelize_typescript_1.Model {
+    static hashPassword(instance) {
+        const saltRounds = 10;
+        const hashedPassword = bcrypt.hashSync(instance.mdp, saltRounds);
+        instance.mdp = hashedPassword;
+    }
 };
 __decorate([
     (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.STRING,
-        allowNull: false,
+        type: sequelize_typescript_1.DataType.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
     }),
-    __metadata("design:type", String)
-], User.prototype, "name", void 0);
+    __metadata("design:type", Number)
+], User.prototype, "id", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({
         type: sequelize_typescript_1.DataType.STRING,
         allowNull: false,
     }),
     __metadata("design:type", String)
-], User.prototype, "description", void 0);
+], User.prototype, "nom", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.STRING,
+        allowNull: false,
+    }),
+    __metadata("design:type", String)
+], User.prototype, "prenom", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.STRING,
+        allowNull: false,
+        unique: true,
+    }),
+    __metadata("design:type", String)
+], User.prototype, "email", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.STRING,
+        allowNull: false,
+    }),
+    __metadata("design:type", String)
+], User.prototype, "mdp", void 0);
+__decorate([
+    (0, sequelize_typescript_1.HasMany)(() => depenseModel_1.Depense),
+    __metadata("design:type", Array)
+], User.prototype, "depenses", void 0);
+__decorate([
+    sequelize_typescript_1.BeforeCreate,
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [User]),
+    __metadata("design:returntype", void 0)
+], User, "hashPassword", null);
 exports.User = User = __decorate([
     (0, sequelize_typescript_1.Table)({
         timestamps: false,

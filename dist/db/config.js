@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_typescript_1 = require("sequelize-typescript");
 const userModel_1 = require("../models/userModel");
 const depenseModel_1 = require("../models/depenseModel");
-const categorieModel_1 = require("../models/categorieModel");
+const categorieDepenseModel_1 = require("../models/categorieDepenseModel");
 const connection = new sequelize_typescript_1.Sequelize({
     dialect: "mysql",
     host: "localhost",
@@ -11,6 +11,6 @@ const connection = new sequelize_typescript_1.Sequelize({
     password: "",
     database: "tricount",
     logging: false,
-    models: [userModel_1.User, depenseModel_1.Depense, categorieModel_1.Categorie],
+    models: [userModel_1.User, depenseModel_1.Depense, categorieDepenseModel_1.CategorieDepense],
 });
 exports.default = connection;

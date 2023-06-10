@@ -9,45 +9,45 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteCategorie = exports.updateCategorie = exports.getCategorieById = exports.getAllCategories = exports.createCategorie = void 0;
+exports.deleteCategorieDepense = exports.updateCategorieDepense = exports.getCategorieDepenseById = exports.getAllCategorieDepenses = exports.createCategorieDepense = void 0;
 const categorieModel_1 = require("../models/categorieModel");
-const createCategorie = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    var users = yield categorieModel_1.Categorie.create(Object.assign({}, req.body));
+const createCategorieDepense = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    var users = yield categorieModel_1.CategorieDepense.create(Object.assign({}, req.body));
     return res
         .status(200)
-        .json({ message: "Categorie created successfully", data: users });
+        .json({ message: "CategorieDepense created successfully", data: users });
 });
-exports.createCategorie = createCategorie;
-const getAllCategories = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const allCategories = yield categorieModel_1.Categorie.findAll();
+exports.createCategorieDepense = createCategorieDepense;
+const getAllCategorieDepenses = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const allCategorieDepenses = yield categorieModel_1.CategorieDepense.findAll();
     return res
         .status(200)
-        .json({ message: "Categorie fetched successfully", data: allCategories });
+        .json({ message: "CategorieDepense fetched successfully", data: allCategorieDepenses });
 });
-exports.getAllCategories = getAllCategories;
-const getCategorieById = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getAllCategorieDepenses = getAllCategorieDepenses;
+const getCategorieDepenseById = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    const users = yield categorieModel_1.Categorie.findByPk(id);
+    const users = yield categorieModel_1.CategorieDepense.findByPk(id);
     return res
         .status(200)
-        .json({ message: "Categorie fetched successfully", data: users });
+        .json({ message: "CategorieDepense fetched successfully", data: users });
 });
-exports.getCategorieById = getCategorieById;
-const updateCategorie = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getCategorieDepenseById = getCategorieDepenseById;
+const updateCategorieDepense = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    yield categorieModel_1.Categorie.update(Object.assign({}, req.body), { where: { id } });
-    const updatedCategories = yield categorieModel_1.Categorie.findByPk(id);
+    yield categorieModel_1.CategorieDepense.update(Object.assign({}, req.body), { where: { id } });
+    const updatedCategorieDepenses = yield categorieModel_1.CategorieDepense.findByPk(id);
     return res
         .status(200)
-        .json({ message: "Categorie updated successfully", data: updatedCategories });
+        .json({ message: "CategorieDepense updated successfully", data: updatedCategorieDepenses });
 });
-exports.updateCategorie = updateCategorie;
-const deleteCategorie = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+exports.updateCategorieDepense = updateCategorieDepense;
+const deleteCategorieDepense = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    const deletedCategorie = yield categorieModel_1.Categorie.findByPk(id);
-    yield categorieModel_1.Categorie.destroy({ where: { id } });
+    const deletedCategorieDepense = yield categorieModel_1.CategorieDepense.findByPk(id);
+    yield categorieModel_1.CategorieDepense.destroy({ where: { id } });
     return res
         .status(200)
-        .json({ message: "Categorie deleted successfully", data: deletedCategorie });
+        .json({ message: "CategorieDepense deleted successfully", data: deletedCategorieDepense });
 });
-exports.deleteCategorie = deleteCategorie;
+exports.deleteCategorieDepense = deleteCategorieDepense;
