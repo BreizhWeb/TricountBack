@@ -1,5 +1,7 @@
 import express from "express";
-import usersRoutes from "./routes/router";
+import userRoutes from "./routes/userRouter";
+import depenseRoutes from "./routes/depenseRouter";
+import categorieRoutes from "./routes/categorieRouter";
 import connection from "./db/config";
 import { json, urlencoded } from "body-parser";
 
@@ -9,7 +11,9 @@ app.use(json());
 
 app.use(urlencoded({ extended: true }));
 
-app.use("/users", usersRoutes);
+app.use("/", userRoutes);
+app.use("/", depenseRoutes);
+app.use("/", categorieRoutes);
 
 app.use(
   (
