@@ -10,6 +10,11 @@ const categorieDepenseRouter_1 = __importDefault(require("./routes/categorieDepe
 const config_1 = __importDefault(require("./db/config"));
 const body_parser_1 = require("body-parser");
 const app = (0, express_1.default)();
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 app.use((0, body_parser_1.json)());
 app.use((0, body_parser_1.urlencoded)({ extended: true }));
 app.use("/", userRouter_1.default);

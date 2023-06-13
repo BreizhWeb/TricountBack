@@ -1,6 +1,6 @@
-import { Table, Model, Column, DataType, HasMany, BeforeCreate } from "sequelize-typescript";
-const bcrypt = require('bcrypt');
-import { Depense } from "./depenseModel";
+import { Table, Column, Model, DataType, HasMany, BeforeCreate } from 'sequelize-typescript';
+import bcrypt from 'bcrypt';
+import { Depense } from './depenseModel';
 
 @Table({
   timestamps: false,

@@ -12,10 +12,23 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteUser = exports.updateUser = exports.getUserById = exports.getAllUsers = exports.createUser = void 0;
 const userModel_1 = require("../models/userModel");
 const createUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    var user = yield userModel_1.User.create(Object.assign({}, req.body));
-    return res
-        .status(200)
-        .json({ message: "User created successfully", data: user });
+    try {
+        const existingUser = yield userModel_1.User.findOne({
+            where: { email: req.body.email }
+        });
+        if (existingUser) {
+            return res.status(409).json({ message: 'Adresse e-mail déjà utilisée.' });
+        }
+        var user = yield userModel_1.User.create(Object.assign({}, req.body));
+        return res
+            .status(200)
+            .json({ message: "User created successfully", data: user });
+    }
+    catch (error) {
+        return res
+            .status(500)
+            .json({ message: "Une erreur est survenue lors de l\'inscription." });
+    }
 });
 exports.createUser = createUser;
 const getAllUsers = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {

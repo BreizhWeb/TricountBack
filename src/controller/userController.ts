@@ -3,10 +3,23 @@ import { RequestHandler } from "express";
 import { User } from "../models/userModel";
 
 export const createUser: RequestHandler = async (req, res, next) => {
-  var user = await User.create({ ...req.body });
-  return res
-    .status(200)
-    .json({ message: "User created successfully", data: user });
+  try {
+    const existingUser = await User.findOne({   
+      where: { email: req.body.email }  
+    });
+    if (existingUser) {
+      return res.status(409).json({ message: 'Adresse e-mail déjà utilisée.' });
+    }
+
+    var user = await User.create({ ...req.body });
+    return res
+      .status(200)
+      .json({ message: "User created successfully", data: user });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({  message: "Une erreur est survenue lors de l\'inscription." });
+  }
 };
 
 export const getAllUsers: RequestHandler = async (req, res, next) => {

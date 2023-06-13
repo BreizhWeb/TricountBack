@@ -8,15 +8,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 const sequelize_typescript_1 = require("sequelize-typescript");
-const bcrypt = require('bcrypt');
+const bcrypt_1 = __importDefault(require("bcrypt"));
 const depenseModel_1 = require("./depenseModel");
 let User = exports.User = class User extends sequelize_typescript_1.Model {
     static hashPassword(instance) {
         const saltRounds = 10;
-        const hashedPassword = bcrypt.hashSync(instance.mdp, saltRounds);
+        const hashedPassword = bcrypt_1.default.hashSync(instance.mdp, saltRounds);
         instance.mdp = hashedPassword;
     }
 };
