@@ -2,6 +2,7 @@ import express from "express";
 import userRoutes from "./routes/userRouter";
 import depenseRoutes from "./routes/depenseRouter";
 import categorieDepenseRoutes from "./routes/categorieDepenseRouter";
+import participationRoutes from "./routes/participationRouter";
 import connection from "./db/config";
 import { json, urlencoded } from "body-parser";
 
@@ -20,6 +21,7 @@ app.use(urlencoded({ extended: true }));
 app.use("/", userRoutes);
 app.use("/", depenseRoutes);
 app.use("/", categorieDepenseRoutes);
+app.use("/", participationRoutes);
 
 app.use(
   (
