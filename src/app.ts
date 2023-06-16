@@ -4,8 +4,6 @@ import depenseRoutes from "./routes/depenseRouter";
 import categorieDepenseRoutes from "./routes/categorieDepenseRouter";
 import connection from "./db/config";
 import { json, urlencoded } from "body-parser";
-import bcrypt from 'bcrypt';
-import { User } from './models/userModel';
 
 const app = express();
 
