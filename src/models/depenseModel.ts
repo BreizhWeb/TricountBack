@@ -1,6 +1,7 @@
-import { Table, Model, Column, DataType, ForeignKey, BelongsTo } from "sequelize-typescript";
+import { Table, Model, Column, DataType, BelongsToMany, BelongsTo, ForeignKey } from "sequelize-typescript";
 import { User } from "./userModel";
 import { CategorieDepense } from "./categorieDepenseModel";
+import { Participation } from "./participationModel";
 
 @Table({
   timestamps: false,
@@ -26,23 +27,15 @@ export class Depense extends Model<Depense> {
   })
   date!: Date;
 
-  @ForeignKey(() => User)
-  @Column({
-    type: DataType.INTEGER,
-    allowNull: false,
-  })
-  id_utilisateur_payeur!: number;
-
   @ForeignKey(() => CategorieDepense)
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
   })
-  id_categorie_depense!: number;
 
-  // Relations
-  @BelongsTo(() => User)
-  utilisateur_payeur!: User;
+  id_categorie_depense!: number;
+  @BelongsToMany(() => User, () => Participation)
+  utilisateurs!: User[];
 
   @BelongsTo(() => CategorieDepense)
   categorie_depense!: CategorieDepense;

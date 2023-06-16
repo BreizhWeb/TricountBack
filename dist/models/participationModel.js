@@ -9,12 +9,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Depense = void 0;
+exports.Participation = void 0;
 const sequelize_typescript_1 = require("sequelize-typescript");
 const userModel_1 = require("./userModel");
-const categorieDepenseModel_1 = require("./categorieDepenseModel");
-const participationModel_1 = require("./participationModel");
-let Depense = exports.Depense = class Depense extends sequelize_typescript_1.Model {
+const depenseModel_1 = require("./depenseModel");
+let Participation = exports.Participation = class Participation extends sequelize_typescript_1.Model {
 };
 __decorate([
     (0, sequelize_typescript_1.Column)({
@@ -23,40 +22,41 @@ __decorate([
         autoIncrement: true,
     }),
     __metadata("design:type", Number)
-], Depense.prototype, "id", void 0);
+], Participation.prototype, "id", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({
         type: sequelize_typescript_1.DataType.FLOAT,
         allowNull: false,
     }),
     __metadata("design:type", Number)
-], Depense.prototype, "montant", void 0);
+], Participation.prototype, "montantPaye", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.DATE,
-        allowNull: false,
-    }),
-    __metadata("design:type", Date)
-], Depense.prototype, "date", void 0);
-__decorate([
-    (0, sequelize_typescript_1.ForeignKey)(() => categorieDepenseModel_1.CategorieDepense),
+    (0, sequelize_typescript_1.ForeignKey)(() => userModel_1.User),
     (0, sequelize_typescript_1.Column)({
         type: sequelize_typescript_1.DataType.INTEGER,
         allowNull: false,
     }),
     __metadata("design:type", Number)
-], Depense.prototype, "id_categorie_depense", void 0);
+], Participation.prototype, "id_utilisateur", void 0);
 __decorate([
-    (0, sequelize_typescript_1.BelongsToMany)(() => userModel_1.User, () => participationModel_1.Participation),
-    __metadata("design:type", Array)
-], Depense.prototype, "utilisateurs", void 0);
+    (0, sequelize_typescript_1.ForeignKey)(() => depenseModel_1.Depense),
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.INTEGER,
+        allowNull: false,
+    }),
+    __metadata("design:type", Number)
+], Participation.prototype, "id_depense", void 0);
 __decorate([
-    (0, sequelize_typescript_1.BelongsTo)(() => categorieDepenseModel_1.CategorieDepense),
-    __metadata("design:type", categorieDepenseModel_1.CategorieDepense)
-], Depense.prototype, "categorie_depense", void 0);
-exports.Depense = Depense = __decorate([
+    (0, sequelize_typescript_1.BelongsTo)(() => userModel_1.User),
+    __metadata("design:type", userModel_1.User)
+], Participation.prototype, "utilisateur", void 0);
+__decorate([
+    (0, sequelize_typescript_1.BelongsTo)(() => depenseModel_1.Depense),
+    __metadata("design:type", depenseModel_1.Depense)
+], Participation.prototype, "depense", void 0);
+exports.Participation = Participation = __decorate([
     (0, sequelize_typescript_1.Table)({
         timestamps: false,
-        tableName: "Depenses",
+        tableName: "Participation",
     })
-], Depense);
+], Participation);

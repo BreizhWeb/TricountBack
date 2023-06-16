@@ -16,7 +16,9 @@ exports.User = void 0;
 const sequelize_typescript_1 = require("sequelize-typescript");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const depenseModel_1 = require("./depenseModel");
+const participationModel_1 = require("./participationModel");
 let User = exports.User = class User extends sequelize_typescript_1.Model {
+    // Relations
     static hashPassword(instance) {
         const saltRounds = 10;
         const hashedPassword = bcrypt_1.default.hashSync(instance.mdp, saltRounds);
@@ -61,10 +63,7 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "mdp", void 0);
 __decorate([
-    (0, sequelize_typescript_1.HasMany)(() => depenseModel_1.Depense),
-    __metadata("design:type", Array)
-], User.prototype, "depenses", void 0);
-__decorate([
+    (0, sequelize_typescript_1.BelongsToMany)(() => depenseModel_1.Depense, () => participationModel_1.Participation),
     sequelize_typescript_1.BeforeCreate,
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [User]),

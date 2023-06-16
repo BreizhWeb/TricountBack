@@ -1,6 +1,7 @@
-import { Table, Column, Model, DataType, HasMany, BeforeCreate } from 'sequelize-typescript';
+import { Table, Column, Model, DataType, BelongsToMany, BeforeCreate } from 'sequelize-typescript';
 import bcrypt from 'bcrypt';
 import { Depense } from './depenseModel';
+import { Participation } from './participationModel';
 
 @Table({
   timestamps: false,
@@ -40,8 +41,7 @@ export class User extends Model<User> {
   mdp!: string;
 
   // Relations
-  @HasMany(() => Depense)
-  depenses!: Depense[];
+  @BelongsToMany(() => Depense, () => Participation)
 
   @BeforeCreate
   static hashPassword(instance: User) {

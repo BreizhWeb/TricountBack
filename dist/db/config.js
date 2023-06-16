@@ -4,6 +4,7 @@ const sequelize_typescript_1 = require("sequelize-typescript");
 const userModel_1 = require("../models/userModel");
 const depenseModel_1 = require("../models/depenseModel");
 const categorieDepenseModel_1 = require("../models/categorieDepenseModel");
+const participationModel_1 = require("../models/participationModel");
 const connection = new sequelize_typescript_1.Sequelize({
     dialect: "mysql",
     host: "localhost",
@@ -11,6 +12,6 @@ const connection = new sequelize_typescript_1.Sequelize({
     password: "",
     database: "tricount",
     logging: false,
-    models: [userModel_1.User, depenseModel_1.Depense, categorieDepenseModel_1.CategorieDepense],
+    models: [userModel_1.User, depenseModel_1.Depense, categorieDepenseModel_1.CategorieDepense, participationModel_1.Participation],
 });
 exports.default = connection;
