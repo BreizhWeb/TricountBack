@@ -2,6 +2,7 @@ import { RequestHandler } from "express";
 
 import { User } from "../models/userModel";
 
+// Création d'un utilisateur
 export const createUser: RequestHandler = async (req, res, next) => {
   try {
     const existingUser = await User.findOne({   
@@ -22,6 +23,7 @@ export const createUser: RequestHandler = async (req, res, next) => {
   }
 };
 
+// Récupération de tous les utilisateurs
 export const getAllUsers: RequestHandler = async (req, res, next) => {
   const allUsers: User[] = await User.findAll();
   return res
@@ -29,6 +31,7 @@ export const getAllUsers: RequestHandler = async (req, res, next) => {
     .json({ message: "User fetched successfully", data: allUsers });
 };
 
+// Récupération d'un utilisateur avec son id
 export const getUserById: RequestHandler = async (req, res, next) => {
   const { id } = req.params;
   const user: User | null = await User.findByPk(id);
@@ -37,6 +40,7 @@ export const getUserById: RequestHandler = async (req, res, next) => {
     .json({ message: "User fetched successfully", data: user });
 };
 
+// Modification d'un utilisateur avec son id
 export const updateUser: RequestHandler = async (req, res, next) => {
   const { id } = req.params;
   await User.update({ ...req.body }, { where: { id } });
@@ -46,6 +50,7 @@ export const updateUser: RequestHandler = async (req, res, next) => {
     .json({ message: "User updated successfully", data: updatedUser });
 };
 
+// Suppresion d'un utilisateur avec son id
 export const deleteUser: RequestHandler = async (req, res, next) => {
   const { id } = req.params;
   const deletedUser: User | null = await User.findByPk(id);

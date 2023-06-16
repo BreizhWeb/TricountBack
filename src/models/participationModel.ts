@@ -7,6 +7,8 @@ import { Depense } from "./depenseModel";
   tableName: "Participation",
 })
 export class Participation extends Model<Participation> {
+  // Définition des colonnes de la table "Participation"
+
   @Column({
     type: DataType.INTEGER,
     primaryKey: true,
@@ -14,12 +16,14 @@ export class Participation extends Model<Participation> {
   })
   id!: number;
 
+  // Colonne "montantPaye" de type nombre flottant non null
   @Column({
     type: DataType.FLOAT,
     allowNull: false,
   })
   montantPaye!: number;
 
+  // Colonne "id_utilisateur" de type entier non null avec clé étrangère vers la table "User"
   @ForeignKey(() => User)
   @Column({
     type: DataType.INTEGER,
@@ -27,6 +31,7 @@ export class Participation extends Model<Participation> {
   })
   id_utilisateur!: number;
 
+  // Colonne "id_depense" de type entier non null avec clé étrangère vers la table "Depense"
   @ForeignKey(() => Depense)
   @Column({
     type: DataType.INTEGER,
@@ -34,10 +39,11 @@ export class Participation extends Model<Participation> {
   })
   id_depense!: number;
 
-  // Relations
+  // Relation "Participation" appartient à un seul "User"
   @BelongsTo(() => User)
   utilisateur!: User;
 
+  // Relation "Participation" appartient à une seule "Depense"
   @BelongsTo(() => Depense)
   depense!: Depense;
 }

@@ -6,6 +6,8 @@ import { Depense } from "./depenseModel";
   tableName: "CategoriesDepense",
 })
 export class CategorieDepense extends Model<CategorieDepense> {
+  // Définition des colonnes de la table "CategoriesDepense"
+
   @Column({
     type: DataType.INTEGER,
     primaryKey: true,
@@ -13,13 +15,14 @@ export class CategorieDepense extends Model<CategorieDepense> {
   })
   id!: number;
 
+  // Colonne "nom" de type chaîne de caractères non nullable
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
   nom!: string;
 
-  // Relations
+  // Relation "CategorieDepense" a plusieurs "Depense"
   @HasMany(() => Depense)
   depenses!: Depense[];
 }

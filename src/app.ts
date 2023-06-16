@@ -8,21 +8,32 @@ import { json, urlencoded } from "body-parser";
 
 const app = express();
 
+// Configuration des en-têtes CORS
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
 
+// Middleware pour traiter les données JSON dans les requêtes
 app.use(json());
 
+// Middleware pour traiter les données URL encodées dans les requêtes
 app.use(urlencoded({ extended: true }));
 
+// Routes pour les utilisateurs
 app.use("/", userRoutes);
+
+// Routes pour les dépenses
 app.use("/", depenseRoutes);
+
+// Routes pour les catégories de dépenses
 app.use("/", categorieDepenseRoutes);
+
+// Routes pour les participations
 app.use("/", participationRoutes);
 
+// Middleware pour gérer les erreurs
 app.use(
   (
     err: Error,
@@ -34,6 +45,7 @@ app.use(
   }
 );
 
+// Connexion à la base de données
 connection
   .sync()
   .then(() => {
@@ -42,6 +54,8 @@ connection
   .catch((err) => {
     console.log("Error", err);
   });
+
+// Démarrage du serveur sur le port 3000
 app.listen(3000, () => {
   console.log("Server started on port 3000");
 });
